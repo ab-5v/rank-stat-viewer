@@ -3,8 +3,10 @@
 
 include 'externals.yate'
 
-match / test {
-    <h1>Hello, { .username }!</h1>
-
-    <p>{ random() }</p>
+match / body {
+    <div class="b-request">
+        <div class="b-input">
+            <input placeholder="Request" type="text" class="b-input__input" />
+        </div>
+    </div>
 }
