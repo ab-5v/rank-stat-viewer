@@ -6,7 +6,7 @@ include 'externals.yate'
 match / body {
     <div class="b-request">
         <div class="b-input">
-            <input placeholder="Request" type="text" class="b-input__input" />
+            <input placeholder="Request" type="text" class="b-input__input js-request-input" />
         </div>
     </div>
 }
