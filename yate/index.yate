@@ -1,0 +1,10 @@
+// module "main"
+// import "common"
+
+include 'externals.yate'
+
+match / test {
+    <h1>Hello, { .username }!</h1>
+
+    <p>{ random() }</p>
+}

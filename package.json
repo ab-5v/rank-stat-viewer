@@ -1,0 +1,26 @@
+{
+    "name": "rank-stat-viewer",
+    "version": "0.1.0",
+    "author": {
+        "name": "Artur Burtsev",
+        "email": "artjock@gmail.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/artjock/tmpl.git"
+    },
+    "description": "",
+    "dependencies": {},
+    "devDependencies": {
+        "yate": "*",
+        "stylus": "*",
+        "nib": "*",
+        "uglify-js": "*",
+        "csso": "*",
+        "requirer": "0.0.3",
+        "expect.js": "*",
+        "mocha": "*"
+    },
+    "engines": { "node": ">= 0.6.0" },
+    "private": true
+}
