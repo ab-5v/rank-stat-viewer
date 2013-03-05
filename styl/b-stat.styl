@@ -1,0 +1,28 @@
+.b-stat__wrapper
+  width: 760px;
+  margin: 10px auto;
+  padding: 20px;
+  background-color: #FFF;
+  box-shadow: 0 0 2px rgba(0, 0, 0, .4);
+
+.b-stat
+  width: 100%;
+  border-collapse: collapse;
+
+
+.b-stat__cell
+  padding: 5px 20px;
+  max-width: 3em;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  &:first-child
+    max-width: 100%;
+    padding-left: 0;
+
+  &:last-child
+    padding-right: 0;
+
+.b-stat__row:last-child .b-stat__cell
+  border-bottom: 0;

@@ -1,0 +1,20 @@
+match / stat {
+<div class="b-stat__wrapper">
+    <table class="b-stat">
+        apply .stat stat-row
+    </table>
+</div>
+}
+
+match .stat stat-row {
+    <tr class="b-stat__row">
+        apply .key stat-cell
+        apply .mark stat-cell
+    </tr>
+}
+
+match .key|.mark stat-cell {
+    <td class="b-stat__cell">
+        .
+    </td>
+}

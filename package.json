@@ -12,6 +12,8 @@
     "description": "",
     "dependencies": {},
     "devDependencies": {
+        "rank": "0.2.4",
+        "pzero": "*",
         "yate": "*",
         "stylus": "*",
         "nib": "*",
