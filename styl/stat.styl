@@ -1,16 +1,16 @@
-.b-stat__wrapper
+.stat
   width: 760px;
   margin: 10px auto;
   padding: 20px;
   background-color: #FFF;
   box-shadow: 0 0 2px rgba(0, 0, 0, .4);
 
-.b-stat
+.stat__i
   width: 100%;
   border-collapse: collapse;
 
 
-.b-stat__cell
+.stat__cell
   padding: 5px 20px;
   max-width: 3em;
   overflow-x: hidden;
@@ -24,5 +24,9 @@
   &:last-child
     padding-right: 0;
 
-.b-stat__row:last-child .b-stat__cell
+.stat__row:last-child .stat__cell
   border-bottom: 0;
+
+.stat__row_w
+  .input__input
+    width: 100%;

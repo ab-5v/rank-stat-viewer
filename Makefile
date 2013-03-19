@@ -24,8 +24,11 @@ $(RESULT_CSS): $(STATIC_CSS) $(STYL)
 $(RESULT_YATE): $(TMP) $(YATE)
 	$(NBIN)/yate yate/index.yate > $@
 
-$(RESULT_JS): $(STATIC_JS) $(RESULT_YATE) $(JS)
+$(RESULT_JS): $(STATIC_JS) $(RESULT_YATE) $(JS) js/cool/cool.js
 	$(NBIN)/requirer js/index.js $@
+
+js/cool/cool.js: js/cool/lib/*.js
+	make -C js/cool
 
 minify: $(RESULT_CSS) $(RESULT_JS)
 	$(NBIN)/csso $(RESULT_CSS) $(RESULT_CSS)

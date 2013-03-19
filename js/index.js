@@ -8,7 +8,8 @@
 
     require('./stat.js');
 
-    $('body').html( rsv.yate({}, 'body') );
+    require('./cool/cool.js');
+    require('./app.js');
 
     $('body').on('keypress', '.js-request-input', function(e) {
         if (e.which == 13 && $(this).val()) { rsv.stat( $(this).val() ); }
