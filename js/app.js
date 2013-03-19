@@ -86,7 +86,9 @@ cool.view({
             input.val( round(+input.val() - 0.1) );
         }
 
-        this.onchange(e);
+        if (e.which == 38 || e.which == 40 || e.which == 13) {
+            this.onchange(e);
+        }
     },
     draw: function() {
         var that = this;
