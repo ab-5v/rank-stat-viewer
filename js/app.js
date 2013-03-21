@@ -79,11 +79,16 @@ cool.view({
     onkeypress: function(e) {
         var input = $(e.currentTarget);
         var round = function(val) { return Math.round(val * 10) / 10; }
+        var val, which = e.which;
 
-        if (e.which == 38) {
-            input.val( round(+input.val() + 0.1) );
-        } else if (e.which == 40) {
-            input.val( round(+input.val() - 0.1) );
+        if (which == 38 || which == 40) {
+            if (which == 38) {
+                val = round(+input.val() + 0.1);
+            } else if (e.which == 40) {
+                val = round(+input.val() - 0.1);
+            }
+            if (val < 0) { val = 0; }
+            input.val( val );
         }
 
         if (e.which == 38 || e.which == 40 || e.which == 13) {
