@@ -2,7 +2,6 @@
 // import "common"
 
 include 'externals.yate'
-include 'b-stat.yate'
 
 match / cool-app {
     <div class="app"></div>
@@ -29,15 +28,15 @@ match / cool-request {
 
 match / cool-stat {
 <div class="stat">
-    <table class="stat__i">
-        if .stat {
-            <tr class="stat__row stat__row_w">
-                <td class="stat__cell">weight →</td>
-                apply .weight stat-cell-weight
-            </tr>
-        }
-        apply .stat stat-row
-    </table>
+    if .stat {
+        <table class="stat__i">
+                <tr class="stat__row stat__row_w">
+                    <td class="stat__cell">weight →</td>
+                    apply .weight stat-cell-weight
+                </tr>
+            apply .stat stat-row
+        </table>
+    }
 </div>
 }
 
