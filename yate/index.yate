@@ -30,10 +30,14 @@ match / cool-stat {
 <div class="stat">
     if .stat {
         <table class="stat__i">
-                <tr class="stat__row stat__row_w">
-                    <td class="stat__cell">weight →</td>
-                    apply .weight stat-cell-weight
-                </tr>
+            <tr class="stat__row stat__row_w">
+                <td class="stat__cell">id →</td>
+                apply .name stat-cell
+            </tr>
+            <tr class="stat__row stat__row_w">
+                <td class="stat__cell">weight →</td>
+                apply .weight stat-cell-weight
+            </tr>
             apply .stat stat-row
         </table>
     }
@@ -47,7 +51,7 @@ match .stat stat-row {
     </tr>
 }
 
-match .key|.mark stat-cell {
+match .key|.mark|.name stat-cell {
     <td class="stat__cell">
         .
     </td>

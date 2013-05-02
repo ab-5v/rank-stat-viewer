@@ -12,7 +12,7 @@
     "description": "",
     "dependencies": {},
     "devDependencies": {
-        "rank": "0.2.4",
+        "rank": "0.2.6",
         "yate": "*",
         "stylus": "*",
         "nib": "*",

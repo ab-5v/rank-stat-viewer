@@ -47,6 +47,7 @@ cool.view({
         $.getJSON(params.url, function(resp) {
             var stat = params.result.call(resp);
             stat.data = stat.data.map(function(item) { return params.key.call(item); });
+            console.log(stat.data);
             that.trigger('load', stat);
         });
     }
@@ -101,12 +102,13 @@ cool.view({
         this.rank.run(function(result) {
             var stat = result.stat;
             var data = result.data;
+            console.log(data);
 
             var render = data.map(function(item, i) {
                 return { key: item, mark: stat[i] };
             });
 
-            that.data = {stat: render, weight: result.weight};
+            that.data = {stat: render, weight: result.weight, name: result.factor};
 
             that.el.html(that.render().html());
         });
