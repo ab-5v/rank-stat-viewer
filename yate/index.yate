@@ -9,6 +9,11 @@ match / cool-app {
 
 match / cool-request {
     <form class="request">
+        <div class="controls">
+            <div class="control_add">новая</div>
+            <div class="control_list">список</div>
+            <div class="control_rm">удалить</div>
+        </div>
         <div class="input input_100">
             <input placeholder="Request" name="request_url" type="text" class="input__input" />
         </div>

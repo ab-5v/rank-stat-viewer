@@ -17,20 +17,80 @@ cool.view({
     name: 'request',
     events: {
         'submit': 'onsubmit',
-        'rendered': 'onrendered'
+        'rendered': 'onrendered',
+        '.control_add -> click': 'confAdd',
+        '.control_list -> click': 'confList',
+        '.control_rm -> click': 'confRm'
     },
     fields: ['url', 'result', 'key'],
     onrendered: function() {
         var that = this;
-        var params = {};
+        this.fill( this.confLoad()[0] );
+    },
+    confLoad: function() {
+        var conf = [{}];
+        try {
+            conf = JSON.parse( localStorage.getItem('cool-request') );
+        } catch (e) {}
 
-        try { params = JSON.parse( localStorage.getItem('cool-request') ) || {}; } catch (e) {}
+        return conf;
+    },
+    confSave: function(conf) {
+        var saved = false;
+        var confs = this.confLoad().map(function(item) {
+            if (!item.url || item.url == conf.url) {
+                saved = true;
+                return conf;
+            } else {
+                return item;
+            }
+        });
 
+        if (!saved) {
+            confs.push(conf);
+        }
+
+        localStorage.setItem('cool-request', JSON.stringify(confs));
+    },
+    fill: function(conf) {
+        var that = this;
         this.fields.forEach(function(name) {
             that['$' + name] = that.el
                 .find( 'input[name=' + that.name + '_' + name + ']' )
-                .val( params[name] );
+                .val( conf[name] );
         });
+    },
+    confAdd: function() {
+        this.fill({});
+    },
+    confList: function() {
+        var that = this;
+        var confs = this.confLoad();
+        var html = function(conf, i) { return '<div data-i="' + i + '">' + conf.url + '</div>'; }
+
+        $('<div/>')
+            .html(confs.map(html))
+            .css({
+                'position': 'absolute',
+                'top': '0',
+                'background-color': '#fff',
+                'z-index': '11'
+            })
+            .appendTo('body')
+            .click(function(e) {
+                var i = $(e.target).attr('data-i');
+                that.fill(confs[i]);
+                $(e.target).parent().remove();
+            });
+    },
+    confRm: function() {
+        var url = this.$url.val();
+        var confs = this.confLoad().filter(function(conf) {
+            return conf.url !== url;
+        });
+
+        localStorage.setItem('cool-request', JSON.stringify(confs));
+        this.fill({});
     },
     onsubmit: function(e) {
         e.preventDefault();
@@ -44,7 +104,7 @@ cool.view({
         });
 
         if (!empties.length) {
-            localStorage.setItem('cool-request', JSON.stringify(params));
+            this.confSave(params);
             this.getters(params);
             this.load(params);
         }
