@@ -2,12 +2,15 @@
 
     var rsv = global.rsv = {};
 
-    require('../node_modules/pzero/pzero.js');
-    require('../node_modules/rank/rAnk.js');
-    require('./yate.js');
-    require('./moment.js');
+    /* borschik:include:../components/pzero/pzero.js */
+    /* borschik:include:../components/rAnk/rAnk.js */
+    /* borschik:include:../components/xtnd/index.js */
+    /* borschik:include:../components/cool/index.js */
+    /* borschik:include:../components/moment/min/moment.min.js */
+    /* borschik:include:../components/moment/min/lang/ru.js */
+    /* borschik:include:yate.js */
 
-    require('./cool/cool.js');
-    require('./app.js');
+
+    /* borschik:include:app.js */
 
 })(this);

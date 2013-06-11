@@ -12,13 +12,12 @@
     "description": "",
     "dependencies": {},
     "devDependencies": {
-        "rank": "0.3.2",
         "yate": "*",
         "stylus": "*",
         "nib": "*",
         "uglify-js": "*",
         "csso": "*",
-        "requirer": "0.0.3",
+        "borschik": "*",
         "expect.js": "*",
         "mocha": "*"
     },

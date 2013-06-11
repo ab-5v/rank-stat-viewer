@@ -13,7 +13,7 @@ JS=js/*
 STYL=styl/*
 YATE=yate/*
 
-all: node_modules $(RESULT_JS) $(RESULT_CSS)
+all: node_modules components $(RESULT_JS) $(RESULT_CSS)
 
 $(TMP) $(STATIC_JS) $(STATIC_CSS): %:
 	mkdir -p $*
@@ -24,11 +24,8 @@ $(RESULT_CSS): $(STATIC_CSS) $(STYL)
 $(RESULT_YATE): $(TMP) $(YATE)
 	$(NBIN)/yate yate/index.yate > $@
 
-$(RESULT_JS): $(STATIC_JS) $(RESULT_YATE) $(JS) js/cool/cool.js
-	$(NBIN)/requirer js/index.js $@
-
-js/cool/cool.js: js/cool/lib/*.js
-	make -C js/cool
+$(RESULT_JS): $(STATIC_JS) $(RESULT_YATE) $(JS)
+	$(NBIN)/borschik -i js/index.js -o $@ --minimize=no
 
 minify: $(RESULT_CSS) $(RESULT_JS)
 	$(NBIN)/csso $(RESULT_CSS) $(RESULT_CSS)
@@ -41,5 +38,8 @@ clean:
 
 node_modules: package.json
 	npm install
+
+components: bower.json
+	bower install
 
 .PHONY: clean minify all

@@ -1,15 +1,26 @@
+cool.view.prototype.html = function(json) {
+    return yr.run('main', json.data, 'cool-' + this.name);
+};
+
 cool.view({
     name: 'app',
-    views: ['request', 'stat']
+    views: ['request', 'stat'],
+    events: {
+        'rendered': 'onrendered'
+    },
+    onrendered: function() {
+        $('body').append(this.el);
+    }
 });
 
 cool.view({
     name: 'request',
     events: {
-        'submit': 'onsubmit'
+        'submit': 'onsubmit',
+        'rendered': 'onrendered'
     },
     fields: ['url', 'result', 'key'],
-    init: function() {
+    onrendered: function() {
         var that = this;
         var params = {};
 
@@ -47,8 +58,7 @@ cool.view({
         $.getJSON(params.url, function(resp) {
             var stat = params.result.call(resp);
             stat.data = stat.data.map(function(item) { return params.key.call(item); });
-            console.log(stat.data);
-            that.trigger('load', stat);
+            that.emit('loaded', stat);
         });
     }
 });
@@ -56,9 +66,9 @@ cool.view({
 cool.view({
     name: 'stat',
     events: {
-        'load.request': 'onload',
-        'input change': 'onchange',
-        'keydown input': 'onkeypress'
+        'request -> loaded': 'onload',
+        'input -> change': 'onchange',
+        'input -> keydown': 'onkeypress'
     },
     onload: function(e, stat) {
         this.rank = rAnk();
@@ -97,23 +107,19 @@ cool.view({
         }
     },
     draw: function() {
-        var that = this;
+        var result = this.rank.run();
+        var stat = result.stat;
+        var data = result.data;
 
-        this.rank.run(function(result) {
-            var stat = result.stat;
-            var data = result.data;
-            console.log(data);
-
-            var render = data.map(function(item, i) {
-                return { key: item, mark: stat[i] };
-            });
-
-            that.data = {stat: render, weight: result.weight, name: result.factor};
-
-            that.el.html(that.render().html());
+        var render = data.map(function(item, i) {
+            return { key: item, mark: stat[i] };
         });
+
+        this.data({stat: render, weight: result.weight, name: result.factor});
+
+        this.render();
     }
 });
 
 
-cool.view('app').appendTo('body');
+cool.view('app');
